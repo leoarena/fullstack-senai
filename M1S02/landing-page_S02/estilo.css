@@ -1,0 +1,55 @@
+body {
+    background-image: url(https://cdn.pixabay.com/photo/2015/09/05/22/33/office-925806_960_720.jpg);
+    background-size: cover;
+}
+
+h1 {
+    font-size: 90px;
+}
+
+h2 {
+    color: rgba(206, 206, 206, 0.87);
+}
+
+#container3 {
+    display: flex;
+}
+
+#container1 {
+    height: 100%;
+    width: 50%;
+    margin: 45px 0 0;
+    padding-left: 60px;
+}
+
+#container2 {
+    height: 100%;
+    width: 50%;
+    margin: 250px 110px 0 450px;
+    text-align: center;
+    background-color: black;
+    border-radius: 2%;
+}
+
+#container2 p {
+    color: white;
+    padding: 0 30px;
+}
+
+button {
+    background-color: orange;
+    height: 35px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    margin: 0px 10px 10px;
+}
+
+form button {
+    margin: 0px 10px 10px;
+}

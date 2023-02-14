@@ -1,0 +1,58 @@
+html {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0f172a;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    width: 300px;
+    color: white;
+    position: absolute;
+    top: 10%;
+    text-align: center;
+}
+
+.div-container {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin: 0px 0px 10px;
+    height: 50px;
+    width: 300px;
+    font-size: large;
+}
+
+#botao-alerta {
+    background-color: red;
+}
+
+#botao-pagina2 a {
+    text-decoration: none;
+    color: black;
+}
+
+#botao-nomecompleto {
+    margin: 0;
+}
+
+#botao-voltar a{
+    text-decoration: none;
+    color: black;
+}
+
+.div-container2 {
+    height: 290px;
+}
