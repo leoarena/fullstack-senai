@@ -1,35 +1,38 @@
-import { Negociacao } from "../models/negociacao.js"
-import { ListaNegociacoes } from "../models/listaNegociacoes.js"
-import { NegociacoesView } from "../views/NegociacoesView.js"
+import { Negociacao } from "../models/negociacao.js";
+import { ListaNegociacoes } from "../models/listaNegociacoes.js";
+import { NegociacoesView } from "../views/NegociacoesView.js";
 
 export class NegociacaoController {
-    #campoData
-    #campoQuantidade
-    #campoValor
-    #listaNegociacoes
-    #tabelaNegociacoes
+  #campoData;
+  #campoQuantidade;
+  #campoValor;
+  #campoFiltro;
+  #listaNegociacoes;
+  #tabelaNegociacoes;
 
-    constructor() {
-        this.#campoData = document.querySelector('#data')
-        this.#campoQuantidade = document.querySelector('#quantidade')
-        this.#campoValor = document.querySelector('#valor')
-        this.#listaNegociacoes = new ListaNegociacoes()
-        this.#tabelaNegociacoes = new NegociacoesView()
-    }
+  constructor() {
+    this.#campoData = document.querySelector("#inputData");
+    this.#campoQuantidade = document.querySelector("#inputQuantidade");
+    this.#campoValor = document.querySelector("#inputValor");
+    this.#campoFiltro = document.querySelector("#inputFiltro");
+    this.#listaNegociacoes = new ListaNegociacoes();
+    this.#tabelaNegociacoes = new NegociacoesView();
+  }
 
-    criarNegociacao() {
-        let data = Date(this.#campoData.value)
-        let quantidade = this.#campoQuantidade.value
-        let valor = this.#campoValor.value
-        
-        let negociacao = new Negociacao(data, quantidade, valor)
-        console.log(negociacao)
+  criarNegociacao() {
+    let data = this.#campoData.value;
+    let quantidade = this.#campoQuantidade.value;
+    let valor = this.#campoValor.value;
 
-        this.#listaNegociacoes.adiciona(negociacao)
+    let negociacao = new Negociacao(data, quantidade, valor);
 
-        let objetoNegociacoes = this.#listaNegociacoes.negociacoes
-        console.log(objetoNegociacoes)
+    this.#listaNegociacoes.adicionar(negociacao);
+    this.#tabelaNegociacoes.adicionarLinha(negociacao);
+  }
 
-        this.#tabelaNegociacoes.adicionarLinha(data, quantidade, valor)
-    }
+  filtrarNegociacoes() {
+    let valorFiltro = this.#campoFiltro.value;
+    let listaFiltrada = this.#listaNegociacoes.filtrarNegociacoes(valorFiltro);
+    this.#tabelaNegociacoes.atualizarTabela(listaFiltrada);
+  }
 }

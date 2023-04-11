@@ -1,18 +1,50 @@
 export class NegociacoesView {
-    #tabelaNegociacoes
+  #tabelaNegociacoes;
 
+  constructor() {
+    this.#tabelaNegociacoes = document.querySelector("#table tbody");
+  }
 
-    constructor() {
-        this.#tabelaNegociacoes = document.querySelector('#table')
-    }
+  adicionarLinha(negociacao) {
+    const tr = document.createElement("tr");
+    const tdData = document.createElement("td");
+    const tdQuantidade = document.createElement("td");
+    const tdValor = document.createElement("td");
+    const tdValorTotal = document.createElement("td");
 
-    adicionarLinha(data, quantidade, valor) {
-        let celulaData = document.querySelector('#tdData');
-        let celulaQuantidade = document.querySelector('#tdQuantidade');
-        let celulaValor = document.querySelector('#tdValor');
+    tdData.textContent = negociacao.data;
+    tdQuantidade.textContent = negociacao.quantidade;
+    tdValor.textContent = negociacao.valor;
+    tdValorTotal.textContent = negociacao.valorTotal;
 
-        celulaData.innerHTML = data
-        celulaQuantidade.innerHTML = quantidade
-        celulaValor.innerHTML = valor
-    }
+    tr.appendChild(tdData);
+    tr.appendChild(tdQuantidade);
+    tr.appendChild(tdValor);
+    tr.appendChild(tdValorTotal);
+
+    this.#tabelaNegociacoes.appendChild(tr);
+  }
+
+  atualizarTabela(listaFiltrada) {
+    this.#tabelaNegociacoes.innerHTML = "";
+    listaFiltrada.forEach((negociacao) => {
+      const tr = document.createElement("tr");
+      const tdData = document.createElement("td");
+      const tdQuantidade = document.createElement("td");
+      const tdValor = document.createElement("td");
+      const tdValorTotal = document.createElement("td");
+
+      tdData.textContent = negociacao.data;
+      tdQuantidade.textContent = negociacao.quantidade;
+      tdValor.textContent = negociacao.valor;
+      tdValorTotal.textContent = negociacao.valorTotal;
+
+      tr.appendChild(tdData);
+      tr.appendChild(tdQuantidade);
+      tr.appendChild(tdValor);
+      tr.appendChild(tdValorTotal);
+
+      this.#tabelaNegociacoes.appendChild(tr);
+    });
+  }
 }

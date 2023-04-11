@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bolsa de Valores</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
     <h1>Bolsa de Valores</h1>
     <form id="form">
+      <div class="item">
+        <label for="inputData">Data:</label>
+        <input type="date" id="inputData" required />
+      </div>
 
-        <div class="item">
-        <label for="data">Data:</label>
-        <input type="date" id="data">
-        </div>
-        
-        <div class="item">
-        <label for="">Quantidade:</label>
-        <input type="number" id="quantidade" min="1" max="100">
-        </div>
-        
-        <div class="item">
-        <label for="valor">Valor:</label>
-        <input type="number" id="valor" step='0.1' min="0.0" max="1000000.0">
-        </div>
-        
-        <input type="submit" value="Submeter" id="submit">
+      <div class="item">
+        <label for="inputQuantidade">Quantidade:</label>
+        <input type="number" id="inputQuantidade" min="1" max="100" required />
+      </div>
+
+      <div class="item">
+        <label for="inputValor">Valor:</label>
+        <input
+          type="number"
+          id="inputValor"
+          step="0.1"
+          min="0.0"
+          max="1000000.0"
+          required
+        />
+      </div>
+
+      <input type="submit" value="Submeter" class="button" />
     </form>
+
     <table id="table">
+      <thead>
         <tr>
-            <th id="thData">Data</th>
-            <th id="thQuantidade">Quantidade</th>
-            <th id="thValor">Valor</th>
+          <th id="thData">Data</th>
+          <th id="thQuantidade">Quantidade</th>
+          <th id="thValor">Valor</th>
+          <th id="thValorTotal">Valor Total</th>
         </tr>
-        <tr> 
-            <td id="tdData"></td>
-            <td id="tdQuantidade"></td>
-            <td id="tdValor"></td>
-        </tr>
+      </thead>
+      <tbody></tbody>
     </table>
+    <div class="filtrar">
+      <input type="number" id="inputFiltro" placeholder="Acima de" />
+      <button class="button" id="botaoFiltrar">Filtrar</button>
+    </div>
     <script type="module" src="js/main/index.js"></script>
-</body>
+  </body>
 </html>
