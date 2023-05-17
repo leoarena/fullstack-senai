@@ -38,5 +38,10 @@
 // console.log(buscadorDeDDD(98));
 // console.log(buscadorDeDDD(123));
 
-const geradorDeSenha = require("./moduloGeradorDeSenha");
-console.log(geradorDeSenha(12));
+// const geradorDeSenha = require("./moduloGeradorDeSenha");
+// console.log(geradorDeSenha(12));
+
+const buscarCEP = require("./moduloBuscarCEP");
+buscarCEP(88045300)
+  .then((resultado) => console.log(resultado))
+  .catch((error) => console.log(error));
