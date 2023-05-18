@@ -24,3 +24,17 @@ server.listen(3000, (err) => {
   if (err) return console.log("Erro ao inicializar servidor:", err);
   console.log("Servidor escutando na porta 3000");
 });
+
+const lerDados = (arquivoJSON) => {
+  try {
+    const dadosJSON = moduloFS.readFileSync(arquivoJSON, "utf8");
+    const objetoDados = JSON.parse(dadosJSON);
+    return objetoDados;
+  } catch (error) {
+    console.log("Erro ao ler arquivo JSON:", error);
+    return null;
+  }
+};
+
+const dadosLidos = lerDados("./dados.json");
+console.log(dadosLidos);
