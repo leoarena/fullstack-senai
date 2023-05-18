@@ -2,6 +2,18 @@ const moduloHTTP = require("http");
 const moduloFS = require("fs");
 
 const requestHandler = (req, res) => {
+  switch (req.method) {
+    case "GET":
+      // lógica do GET
+      break;
+    case "POST":
+      // lógica do POST
+      break;
+    default:
+      // lógica do default
+      break;
+  }
+
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/plain");
   res.end("Teste");
