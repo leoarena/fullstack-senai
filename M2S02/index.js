@@ -41,7 +41,25 @@
 // const geradorDeSenha = require("./moduloGeradorDeSenha");
 // console.log(geradorDeSenha(12));
 
-const buscarCEP = require("./moduloBuscarCEP");
-buscarCEP(88045300)
-  .then((resultado) => console.log(resultado))
-  .catch((error) => console.log(error));
+// const buscarCEP = require("./moduloBuscarCEP");
+// buscarCEP(88045300)
+//   .then((resultado) => console.log(resultado))
+//   .catch((error) => console.log(error));
+
+const {
+  cadastrarUsuario,
+  fazerLogin,
+  excluirUsuario,
+} = require("./moduloGerenciadorDeUsuarios");
+
+const usuario1 = {
+  nome: "Teste1",
+  email: "teste@1.com",
+  senha: "senha1",
+};
+
+// cadastrarUsuario(usuario1);
+// fazerLogin("teste@1.com", "senha0"); // incorreto
+// fazerLogin("teste@1.com", "senha1"); // correto
+// excluirUsuario("teste@1.com", "senha0"); // incorreto
+// excluirUsuario("teste@1.com", "senha1"); // correto
