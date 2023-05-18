@@ -12,14 +12,24 @@ const lerDados = (arquivoJSON) => {
   }
 };
 
+const salvarDados = (arquivoJSON, objetoJS) => {
+  try {
+    const dadosJSON = JSON.stringify(objetoJS, null, 2);
+    moduloFS.writeFileSync(arquivoJSON, dadosJSON, "utf8");
+    console.log("Dados salvos com sucesso.");
+  } catch (error) {
+    console.log("Erro ao salvar dados:", error);
+  }
+};
+
 const requestHandler = (req, res) => {
   switch (req.method) {
     case "GET":
-      const dados = lerDados("./dados.json");
-      if (dados !== null) {
+      const objetoDados = lerDados("./dados.json");
+      if (objetoDados !== null) {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify(dados));
+        res.end(JSON.stringify(objetoDados));
       } else {
         res.statusCode = 500;
         res.setHeader("Content-Type", "text/plain");
@@ -28,7 +38,26 @@ const requestHandler = (req, res) => {
       break;
 
     case "POST":
-      // lógica do POST
+      let body = [];
+      req.on("data", (chunk) => body.push(chunk));
+      req.on("end", () => {
+        body = Buffer.concat(body).toString();
+        const objetoDadosAtualizados = JSON.parse(body);
+        const objetoDados = lerDados("./dados.json");
+
+        if (objetoDados !== null) {
+          objetoDados.push(objetoDadosAtualizados);
+          salvarDados("./dados.json", objetoDados);
+
+          res.statusCode = 201;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ message: "Dados salvos com sucesso." }));
+        } else {
+          res.statusCode = 500;
+          res.setHeader("Content-Type", "text/plain");
+          res.end("Erro ao ler dados.");
+        }
+      });
       break;
 
     default:
