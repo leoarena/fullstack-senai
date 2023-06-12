@@ -44,4 +44,27 @@ const atualizarLista = (req, res) => {
   }
 };
 
-module.exports = { atualizarLista };
+const gerarDatas = (req, res) => {
+  const { mes } = req.query;
+
+  if (mes < 1 || mes > 12) {
+    return res.status(400).send({ mensagem: "Mẽs inválido." });
+  }
+
+  const datas = [];
+  const ano = new Date().getFullYear();
+
+  for (let dia = 1; dia <= 31; dia++) {
+    const data = new Date(ano, mes - 1, dia);
+
+    if (data.getMonth() === mes - 1) {
+      const dataFormatada = `${dia.toString().padStart(2, "0")}/${mes
+        .toString()
+        .padStart(2, "0")}/${ano}`;
+      datas.push(dataFormatada);
+    }
+  }
+  res.status(200).send(datas);
+};
+
+module.exports = { atualizarLista, gerarDatas };
