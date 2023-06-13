@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const atualizarLista = (req, res) => {
   const listaModelo = [
     "Pedro",
@@ -67,4 +70,32 @@ const gerarDatas = (req, res) => {
   res.status(200).send(datas);
 };
 
-module.exports = { atualizarLista, gerarDatas };
+const salvarDados = (req, res) => {
+  const dadosRequisicao = req.body;
+
+  let arrayRequisicao = [];
+  if (Object.keys(dadosRequisicao).length > 0) {
+    arrayRequisicao = Array.isArray(dadosRequisicao)
+      ? dadosRequisicao
+      : [dadosRequisicao];
+  }
+
+  let objetoDados = [];
+  try {
+    const dadosJSON = fs.readFileSync(
+      path.join(__dirname, "../database/dados.json")
+    );
+    objetoDados = JSON.parse(dadosJSON);
+  } catch (error) {
+    console.log("Não existem dados salvos.");
+  }
+
+  objetoDados.push(...arrayRequisicao);
+  fs.writeFileSync(
+    path.join(__dirname, "../database/dados.json"),
+    JSON.stringify(objetoDados)
+  );
+  return res.status(200).send(objetoDados);
+};
+
+module.exports = { atualizarLista, gerarDatas, salvarDados };
