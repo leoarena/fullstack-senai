@@ -126,4 +126,49 @@ const filtrarUsuarios = (req, res) => {
   return res.status(200).send(usuariosFiltrados);
 };
 
-module.exports = { atualizarLista, gerarDatas, salvarDados, filtrarUsuarios };
+const alterarDados = (req, res) => {
+  const usuariosJSON = require("../database/user.json");
+  const { id } = req.params;
+  const dadosNovos = req.body;
+
+  const indexUsuariosJSON = usuariosJSON.findIndex(
+    (usuario) => usuario.id === Number(id)
+  );
+
+  if (indexUsuariosJSON === -1) {
+    return res.status(404).json({ error: "Usuário não encontrado." });
+  }
+
+  const usuarioUsuariosJSON = usuariosJSON[indexUsuariosJSON];
+
+  let existemAlteracoes = false;
+  for (const chave in dadosNovos) {
+    if (dadosNovos[chave] !== usuarioUsuariosJSON[chave]) {
+      existemAlteracoes = true;
+      break;
+    }
+  }
+
+  if (!existemAlteracoes)
+    return res.send({ mensagem: "Não existem alterações." });
+
+  const usuarioAtualizado = { ...usuarioUsuariosJSON, ...dadosNovos };
+  usuariosJSON[indexUsuariosJSON] = usuarioAtualizado;
+
+  fs.writeFileSync(
+    path.join(__dirname, "../database/user.json"),
+    JSON.stringify(usuariosJSON)
+  );
+
+  return res
+    .status(200)
+    .send({ mensagem: "Dados alterados com sucesso.", usuarioAtualizado });
+};
+
+module.exports = {
+  atualizarLista,
+  gerarDatas,
+  salvarDados,
+  filtrarUsuarios,
+  alterarDados,
+};
