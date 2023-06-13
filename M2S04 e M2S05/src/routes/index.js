@@ -7,6 +7,7 @@ const {
   filtrarUsuarios,
   alterarDados,
   deletarUsuario,
+  nomeUsuario,
 } = require("../controllers");
 
 rotas.patch("/atualizarLista", atualizarLista);
@@ -15,5 +16,6 @@ rotas.post("/salvarDados", salvarDados);
 rotas.get("/filtrarUsuarios", filtrarUsuarios);
 rotas.put("/alterarDados/:id", alterarDados);
 rotas.delete("/deletarUsuario/:id", deletarUsuario);
+rotas.get("/nomeUsuario/:id", nomeUsuario);
 
 module.exports = rotas;

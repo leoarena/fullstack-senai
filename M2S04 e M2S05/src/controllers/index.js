@@ -189,6 +189,25 @@ const deletarUsuario = (req, res) => {
   return res.status(200).send({ mensagem: "Usuário deletado com sucesso." });
 };
 
+const nomeUsuario = (req, res) => {
+  const usuariosJSON = require("../database/user.json");
+  const { id } = req.params;
+
+  const indexUsuariosJSON = usuariosJSON.findIndex(
+    (usuario) => usuario.id === Number(id)
+  );
+
+  if (indexUsuariosJSON === -1) {
+    return res.status(404).json({ error: "Usuário não encontrado." });
+  }
+
+  const usuarioUsuariosJSON = usuariosJSON[indexUsuariosJSON];
+
+  return res
+    .status(200)
+    .send({ mensagem: `nome do usuário ${id} é ${usuarioUsuariosJSON.name}` });
+};
+
 module.exports = {
   atualizarLista,
   gerarDatas,
@@ -196,4 +215,5 @@ module.exports = {
   filtrarUsuarios,
   alterarDados,
   deletarUsuario,
+  nomeUsuario,
 };
