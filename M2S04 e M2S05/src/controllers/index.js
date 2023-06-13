@@ -98,4 +98,32 @@ const salvarDados = (req, res) => {
   return res.status(200).send(objetoDados);
 };
 
-module.exports = { atualizarLista, gerarDatas, salvarDados };
+const filtrarUsuarios = (req, res) => {
+  const usuariosJSON = require("../database/user.json");
+  const { ageMin, ageMax, state, job } = req.query;
+  let usuariosFiltrados = usuariosJSON;
+
+  if (ageMin)
+    usuariosFiltrados = usuariosFiltrados.filter(
+      (usuario) => usuario.age >= ageMin
+    );
+
+  if (ageMax)
+    usuariosFiltrados = usuariosFiltrados.filter(
+      (usuario) => usuario.age <= ageMax
+    );
+
+  if (state)
+    usuariosFiltrados = usuariosFiltrados.filter(
+      (usuario) => usuario.state.toLowerCase() === state.toLowerCase()
+    );
+
+  if (job)
+    usuariosFiltrados = usuariosFiltrados.filter(
+      (usuario) => usuario.job.toLowerCase() === job.toLowerCase()
+    );
+
+  return res.status(200).send(usuariosFiltrados);
+};
+
+module.exports = { atualizarLista, gerarDatas, salvarDados, filtrarUsuarios };
