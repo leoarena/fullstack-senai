@@ -165,10 +165,35 @@ const alterarDados = (req, res) => {
     .send({ mensagem: "Dados alterados com sucesso.", usuarioAtualizado });
 };
 
+const deletarUsuario = (req, res) => {
+  const usuariosJSON = require("../database/user.json");
+  const { id } = req.params;
+
+  const indexUsuariosJSON = usuariosJSON.findIndex(
+    (usuario) => usuario.id === Number(id)
+  );
+
+  if (indexUsuariosJSON === -1) {
+    return res.status(404).json({ error: "Usuário não encontrado." });
+  }
+
+  const usuariosAtualizados = usuariosJSON.filter(
+    (usuario) => usuario.id !== Number(id)
+  );
+
+  fs.writeFileSync(
+    path.join(__dirname, "../database/user.json"),
+    JSON.stringify(usuariosAtualizados)
+  );
+
+  return res.status(200).send({ mensagem: "Usuário deletado com sucesso." });
+};
+
 module.exports = {
   atualizarLista,
   gerarDatas,
   salvarDados,
   filtrarUsuarios,
   alterarDados,
+  deletarUsuario,
 };
