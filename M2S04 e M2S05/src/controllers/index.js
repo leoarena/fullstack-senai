@@ -208,6 +208,29 @@ const nomeUsuario = (req, res) => {
     .send({ mensagem: `nome do usuário ${id} é ${usuarioUsuariosJSON.name}` });
 };
 
+const converterString = (req, res) => {
+  const { item } = req.body;
+
+  if (typeof item !== "string") {
+    return res
+      .status(400)
+      .send({ mensagem: "O valor do item precisa ser uma string." });
+  }
+
+  let stringConvertida = "";
+
+  for (let i = 0; i < item.length; i++) {
+    const caractere = item[i];
+    if (caractere === caractere.toUpperCase()) {
+      stringConvertida += caractere.toLowerCase();
+    } else {
+      stringConvertida += caractere.toUpperCase();
+    }
+  }
+
+  return res.status(200).send({ item: stringConvertida });
+};
+
 module.exports = {
   atualizarLista,
   gerarDatas,
@@ -216,4 +239,5 @@ module.exports = {
   alterarDados,
   deletarUsuario,
   nomeUsuario,
+  converterString,
 };
