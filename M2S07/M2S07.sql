@@ -65,3 +65,9 @@ VALUES ('Derpson da Silva', 'derpinho', 'derpinho91', 'derpinho91@hotmail.com', 
 
 INSERT INTO Biblioteca (usuario_id, jogo_id)
 VALUES (1, 1);
+
+-- Ex. 4
+SELECT Nome_do_filme, Duracao_do_filme_em_minutos
+FROM Filme
+WHERE Nome_do_filme LIKE '%Ação'
+ORDER BY Duracao_do_filme_em_minutos;
