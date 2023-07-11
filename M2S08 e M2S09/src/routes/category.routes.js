@@ -8,7 +8,7 @@ class CategoryRoutes {
   routesFromCategory() {
     const categoryRoutes = Router();
     categoryRoutes.post("/createOneCategory", createOneCategory);
-    categoryRoutes.get("/listCategories/:offset/:limit", listCategories);
+    categoryRoutes.get("/listCategories/:limit/:offset", listCategories);
     return categoryRoutes;
   }
 }
