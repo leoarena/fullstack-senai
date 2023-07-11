@@ -8,4 +8,8 @@ module.exports = {
   password: process.env.PASSWORDDB,
   database: process.env.DATABASE,
   port: process.env.PORT,
+  define: {
+    underscored: true,
+    underscoredAll: true,
+  },
 };
