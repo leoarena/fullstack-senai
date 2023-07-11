@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const { connection } = require("./database/connection");
+const routes = require("./routes");
 
 class Server {
   constructor(server = express()) {
     this.middlewares(server);
+    this.routes(server);
     this.database();
     this.initializeServer(server);
   }
@@ -12,6 +14,10 @@ class Server {
   async middlewares(app) {
     app.use(cors());
     app.use(express.json());
+  }
+
+  async routes(app) {
+    app.use(routes);
   }
 
   async database() {
