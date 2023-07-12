@@ -1,5 +1,5 @@
-const { STRING, DATE } = require("sequelize");
 const { connection } = require("../database/connection");
+const { STRING, DATE } = require("sequelize");
 
 const Company = connection.define(
   "company",
